@@ -2,9 +2,19 @@
 pipeline {
 	agent any
 	stages {
-		stage('build'){
+		stage('prebuild'){
 			steps {
-				sh ''' echo "building" '''
+				sh ''' apt-get install -y build-essential '''
+			}
+		}
+		stage('build') {
+			steps {
+				sh ''' 
+				    mkdir build
+				    cd build
+    				    cmake ..
+
+				'''
 			}
 		}
 	}
